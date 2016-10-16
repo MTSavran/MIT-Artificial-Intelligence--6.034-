@@ -1,0 +1,92 @@
+# graphs for lab2 tests.py, parsed by read_graphs.py
+# note that syntax requires comments to be on new lines beginning with '#'
+
+
+# basic graph with no edge weights or heuristic
+graph GRAPH_0
+nodes n1 n2 n3 n4
+edges
+n1 n2
+n2 n3
+n3 n4
+n4 n1
+
+
+# basic graph with edge weights and heuristic
+graph GRAPH_1
+nodes a b c d
+edges
+a b 1
+a c 2
+b c 3
+b d 6
+c d 4
+heuristic-start
+d a-0 b-0 c-0 d-0
+c a-1.5 b-2.5 c-0 d-3.5
+heuristic-end
+
+
+# graph to differentiate between most types of search
+graph GRAPH_2
+nodes S A B C D E F G H X Y
+edges
+S A 10
+S B 4
+A C 9
+A D 15
+B C 8
+B X 20
+B Y 20
+C D 7
+C E 9
+C Y 20
+D E 7
+D H 6
+E F 8
+E G 5
+F G 10
+F H 6
+heuristic-start
+G S-25 A-20 B-22 C-14 D-8 E-3 F-9 G-0 H-2 X-0 Y-0
+# same as heuristic={'G':{'S':25, 'A':20, 'B':22, 'C':15, 'D':8, 'E':3, 'F':9, 'H':2, 'G':0}})
+heuristic-end
+
+# Expected paths for GRAPH_2:
+#    SACDEFG: dfs
+#    SACEG: bfs
+#    SADHFG: hill-climbing
+#    SADEG: best-first
+#    SBYCEG: beam
+#    SBCEG: branch & bound (3 variations), A*
+
+
+graph GRAPH_3
+nodes s x y z w g
+edges
+s x 1
+s y 2
+s z 3
+x w 1
+y w 3
+z w 1
+w g 3
+heuristic-start
+g s-0 x-8 y-1 z-4 w-1 g-0
+heuristic-end
+
+# Expected paths for GRAPH_3:
+#    sxwg: dfs, bfs, branch & bound, branch & bound + extended set
+#    sywg: hill-climbing, best-first, beam, A*
+#    szwg: branch & bound + heuristic
+
+
+graph GRAPH_FOR_HEURISTICS
+nodes S A B C G
+edges
+S A 1
+S B 1
+A C 1
+B C 3
+C G 7
+
